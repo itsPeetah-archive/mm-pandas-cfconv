@@ -16,11 +16,11 @@ months = {
 }
 
 
-def extract_month(ts:Timestamp):
+def extract_month(ts:Timestamp) -> int:
     m =ts.month
-    return m;
-def extract_year(ts:Timestamp):
+    return m
+def extract_year(ts:Timestamp) -> int:
     y = ts.year
     return y
-def int_month_to_str(month:int):
+def int_month_to_str(month:int) -> str:
     return months[month]

@@ -1,5 +1,5 @@
 import pandas as pd
-import util
+from util import calendar
 
 # General settings
 current_year = 2022
@@ -36,10 +36,10 @@ df = df.rename(columns={src_code_column : code_col,
                         src_payment_column : pay_col})
 
 codes = df[code_col].unique()
-prev_year = df[df[date_col].apply(util.extract_year) < current_year].groupby(code_col).sum().fillna(na_fill)
-next_year = df[df[date_col].apply(util.extract_year) > current_year].groupby(code_col).sum().fillna(na_fill)
-curr_year = df[df[date_col].apply(util.extract_year) == current_year]
-curr_year[date_col] = curr_year[date_col].apply(util.extract_month).apply(util.int_month_to_str)
+prev_year = df[df[date_col].apply(calendar.extract_year) < current_year].groupby(code_col).sum().fillna(na_fill)
+next_year = df[df[date_col].apply(calendar.extract_year) > current_year].groupby(code_col).sum().fillna(na_fill)
+curr_year = df[df[date_col].apply(calendar.extract_year) == current_year]
+curr_year[date_col] = curr_year[date_col].apply(calendar.extract_month).apply(calendar.int_month_to_str)
 curr_year =curr_year.groupby([code_col, date_col]).sum()
 
 final = pd.DataFrame(index = codes, columns=dst_columns)

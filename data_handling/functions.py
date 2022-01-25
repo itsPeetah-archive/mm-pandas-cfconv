@@ -53,11 +53,13 @@ def adapt_monthly_cols_to_new_format(df:pd.DataFrame, month_labels:dict[int:str]
 def to_old_format(df:pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     newColOrder = [1] + [m + 3 for m in range(0, 12)] + [2, 0]
+    df.index.rename("Codice Commessa", inplace=True)
     df = reorder_cols(df, newColOrder)
     return df
 
 def to_new_format(df:pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     newColOrder = [1] + np.array([(m + 3, m + 3 + 12) for m in range(12)]).flatten().tolist() + [2, 0, -1]
+    df.index.rename("Codice Commessa", inplace=True)
     df = reorder_cols(df, newColOrder)
     return df

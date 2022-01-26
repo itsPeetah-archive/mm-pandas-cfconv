@@ -1,4 +1,3 @@
-from calendar_stuff import months
 from functions import render_xlsx, process_xlsx
 import sys
 from datetime import datetime
@@ -12,6 +11,13 @@ filename_out_old = ""
 filaname_out_new = ""
 
 processed_final_old, processed_final_new = None, None
+
+months = {
+ 1:"Gennaio", 2:"Febbraio", 3:"Marzo",
+ 4:"Aprile", 5:"Maggio", 6:"Giugno",
+ 7:"Luglio", 8:"Agosto", 9:"Settembre",
+ 10:"Ottobre", 11:"Novembre", 12:"Dicembre"   
+}
 
 def openFileNameDialog(window, label=None):
     global filename_in

@@ -8,11 +8,25 @@ Usage:
 from setuptools import setup
 
 APP = ['main.py']
+APP_NAME = "MM-CF-CONV"
 DATA_FILES = []
-OPTIONS = {}
+OPTIONS = {
+    "argv_emulation":True,
+    "iconfile":"icon.icns",
+    "plist":{
+        'CFBundleName': APP_NAME,
+        'CFBundleDisplayName': APP_NAME,
+        'CFBundleGetInfoString': "Converting cashflows",
+        'CFBundleIdentifier': "com.pietrogmoroni.cfconv",
+        'CFBundleVersion': "0.1.0",
+        'CFBundleShortVersionString': "0.1.0",
+        'NSHumanReadableCopyright': u"Copyright © 2022, Pietro Moroni, All Rights Reserved"
+    }
+}
 
 setup(
     app=APP,
+    name=APP_NAME,
     data_files=DATA_FILES,
     options={'py2app': OPTIONS},
     setup_requires=['py2app'],

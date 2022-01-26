@@ -116,3 +116,4 @@ dmypy.json
 # Excel
 *.xls
 *.xlsx
+packenv/

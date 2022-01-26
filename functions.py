@@ -1,12 +1,12 @@
 import pandas as pd
 import numpy as np
 
-def rename_cols(df:pd.DataFrame, colsToRename:dict[str:str]) -> pd.DataFrame:
+def rename_cols(df:pd.DataFrame, colsToRename:dict) -> pd.DataFrame:
     df = df.copy()
     df = df.rename(columns=colsToRename)
     return df
 
-def reorder_cols(df:pd.DataFrame, newColOrder:list[int]) -> pd.DataFrame:
+def reorder_cols(df:pd.DataFrame, newColOrder:list) -> pd.DataFrame:
     df = df.copy()
     df = df.iloc[:,np.array(newColOrder)]
     return df
@@ -26,7 +26,7 @@ def add_next_prev_year_cols(df:pd.DataFrame, curr_year:int) -> pd.DataFrame:
     df["next"] = np.where(df["y"] > curr_year, df["amount"], 0)
     return df
 
-def add_monthly_cols(df:pd.DataFrame, month_labels:dict[int:str], curr_year:int) -> pd.DataFrame:
+def add_monthly_cols(df:pd.DataFrame, month_labels:dict, curr_year:int) -> pd.DataFrame:
     df = df.copy()
     for m_int, m_label in month_labels.items():
         df[m_label] = np.where((df["m"] == m_int) & (df["y"] == curr_year), df["amount"], 0)
@@ -40,7 +40,7 @@ def sum_by_code(df:pd.DataFrame) -> pd.DataFrame:
     df = rename_cols(df, {"prev":"Anni Precedenti", "next":"Anni Successivi", "amount":"Totale Fatturato"})
     return df
 
-def adapt_monthly_cols_to_new_format(df:pd.DataFrame, month_labels:dict[int:str], oLabel:str="Fatturato", nLabel:str="Incasso") -> pd.DataFrame:
+def adapt_monthly_cols_to_new_format(df:pd.DataFrame, month_labels:dict, oLabel:str="Fatturato", nLabel:str="Incasso") -> pd.DataFrame:
     df = df.copy()
     newMonthCols = {}
     for _, m in month_labels.items():
@@ -64,7 +64,7 @@ def to_new_format(df:pd.DataFrame) -> pd.DataFrame:
     df = reorder_cols(df, newColOrder)
     return df
 
-def process_xlsx(filename:str,current_year:int,month_labels:dict[int:str])->tuple[pd.DataFrame,pd.DataFrame]:
+def process_xlsx(filename:str,current_year:int,month_labels:dict)->tuple:
     src = load_src_xlsx(filename)
     df = split_month_year(src)
     df = add_next_prev_year_cols(df,current_year)

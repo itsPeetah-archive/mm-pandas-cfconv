@@ -1,5 +1,5 @@
-from util.calendar import months
-from data_handling.core import process_xlsx, render_xlsx
+from src.calendar import months
+from src.core import process_xlsx, render_xlsx
 import sys
 from datetime import datetime
 from PyQt5.QtCore import *

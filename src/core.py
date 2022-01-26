@@ -1,5 +1,5 @@
 import pandas as pd
-from data_handling.functions import *
+from functions import *
 
 def process_xlsx(filename:str,current_year:int,month_labels:dict[int:str])->tuple[pd.DataFrame,pd.DataFrame]:
     src = load_src_xlsx(filename)

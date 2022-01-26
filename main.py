@@ -1,9 +1,8 @@
 from functions import render_xlsx, process_xlsx
 import sys
 from datetime import datetime
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QWidget, QApplication, QLabel, QPushButton, QFileDialog, QVBoxLayout, QHBoxLayout
 
 current_year = datetime.now().year
 filename_in = ""
@@ -22,7 +21,7 @@ months = {
 def openFileNameDialog(window, label=None):
     global filename_in
     options = QFileDialog.Options()
-    options |= QFileDialog.DontUseNativeDialog
+    # options |= QFileDialog.DontUseNativeDialog
     fileName, _ = QFileDialog.getOpenFileName(window,"QFileDialog.getOpenFileName()", "","Excel Files (*.xlsx)", options=options)
     if fileName:
         filename_in = fileName
@@ -94,7 +93,7 @@ def main():
     processRow = QVBoxLayout()
     processButton = QPushButton("Elabora file")
     processButton.setFixedHeight(60)
-    processButton.setStyleSheet("margin-left: 60px; margin-right:60px")
+    processButton.setStyleSheet("margin-left: 60px; margin-right:60px; font-size:18px")
     processButton.clicked.connect(lambda: load_and_process_files(msgLabel))
     msgLabel = QLabel("")
     
